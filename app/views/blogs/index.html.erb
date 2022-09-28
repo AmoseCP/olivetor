@@ -1,0 +1,30 @@
+<% if user_signed_in? %>
+  <h1>Blogs List</h1>
+  <table class="table table-striped table-hover table-bordered">
+    <thead>
+      <tr class="table-dark">
+        <th>Title</th>
+        <th>Create Time</th>
+        <th>Update Time</th>
+        <th colspan="2" class=" text-center">Operation</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <% @blogs.each do |blog| %>
+         <% if blog.user == current_user %>
+               <tr>
+                <td><%= link_to (blog.title), blog %></td>
+                <td><%= blog.created_at.strftime("%m/%d/%Y") %></td>
+                <td><%= blog.updated_at.strftime("%m/%d/%Y") %></td>
+                
+                <td><%= link_to "Edit", edit_blog_path(blog.id), class:"btn btn-outline-success btn-sm" %></td>
+                <td><%= link_to "Delete", blog_path(blog.id), class:"btn btn-outline-danger btn-sm", data:{turbo_method: :delete, turbo_confirm: " Are you sure to DELETE it?"} %></td>
+               </tr>
+         <% end -%>  
+      <% end -%>
+    </tbody>
+  </table>
+  <%= link_to "New", new_blog_path, class:"btn btn-outline-success btn-sm" %>
+<% else %>
+    <%= render '/home/index'%>
+<% end -%>  

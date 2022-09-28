@@ -1,0 +1,6 @@
+<%= render @blog %>
+<div>
+  <%= link_to "Edit", edit_blog_path(@blog),class:"btn btn-outline-success btn-sm" %> |
+  <%= link_to "Back", blogs_path, class:"btn btn-outline-success btn-sm" %> |
+  <%= link_to "Delete", blog_path(@blog), class:"btn btn-outline-danger btn-sm", data:{turbo_method: :delete, turbo_confirm: "Are you sure to DELETE it?"} %>
+</div>
